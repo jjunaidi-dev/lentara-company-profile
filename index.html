@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lentara - Fulfillment Center & Koperasi UMKM Kalsel</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#064e3b',   /* Emerald 900 / Hijau Tua Utama */
+                            primary: '#047857',/* Emerald 700 */
+                            light: '#f0fdf4',  /* Emerald 50 */
+                            accent: '#10b981', /* Emerald 500 */
+                            mint: '#dcfce7'    /* Emerald 100 */
+                        }
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': {transform: 'translateY(0px)'},
+                            '50%': {transform: 'translateY(-10px)'},
+                        },
+                        pulseGlow: {
+                            '0%, 100%': {boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)'},
+                            '50%': {boxShadow: '0 0 25px rgba(16, 185, 129, 0.8)'},
+                        }
+                    },
+                    animation: {
+                        float: 'float 4s ease-in-out infinite',
+                        'float-delayed': 'float 4s ease-in-out 2s infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom CSS untuk Animasi Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered Delay Utilities */
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+
+        .delay-400 {
+            transition-delay: 400ms;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #047857;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #064e3b;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-brand-accent selection:text-white overflow-x-hidden">
+
+    <!-- NAVBAR (Header Putih Clean) -->
+    <header
+        class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo Brand -->
+                <a href="index.html" class="inline-block group">
+                    <img src="asset/img/logo_lentara.png" alt="Lentara Fulfillment & Koperasi"
+                        class="h-10 w-auto object-contain transition duration-300 group-hover:opacity-80" />
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-700">
+                    <a href="#about" class="hover:text-brand-primary transition-colors duration-200">Tentang Kami</a>
+                    <a href="#katalog" class="hover:text-brand-primary transition-colors duration-200">Katalog
+                        Produk</a>
+                    <a href="#keunggulan" class="hover:text-brand-primary transition-colors duration-200">Keunggulan</a>
+                    <a href="#testimoni" class="hover:text-brand-primary transition-colors duration-200">Testimoni</a>
+                </nav>
+
+                <!-- CTA Button WhatsApp -->
+                <div class="hidden md:flex items-center">
+                    <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20ingin%20bertanya%20layanan%20koperasi/fulfillment"
+                        target="_blank"
+                        class="inline-flex items-center gap-2 bg-brand-dark hover:bg-brand-primary text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                        <i data-lucide="message-square" class="w-4 h-4 text-brand-accent"></i>
+                        <span>Hubungi Kami</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" aria-label="Toggle Navigation Menu"
+                        class="p-2 rounded-lg text-gray-700 hover:bg-brand-light focus:outline-none transition">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#about"
+                class="mobile-nav-link block py-2.5 px-3 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-lg font-medium transition">Tentang
+                Kami</a>
+            <a href="#katalog"
+                class="mobile-nav-link block py-2.5 px-3 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-lg font-medium transition">Katalog
+                Produk</a>
+            <a href="#keunggulan"
+                class="mobile-nav-link block py-2.5 px-3 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-lg font-medium transition">Keunggulan</a>
+            <a href="#testimoni"
+                class="mobile-nav-link block py-2.5 px-3 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-lg font-medium transition">Testimoni</a>
+            <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20ingin%20bertanya" target="_blank"
+                class="block text-center bg-brand-dark hover:bg-brand-primary text-white font-semibold py-3 rounded-xl shadow transition">
+                Hubungi Kami via WA
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section
+        class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-br from-brand-dark via-emerald-900 to-brand-primary text-white overflow-hidden">
+        <!-- Background Decorative Grid Pattern -->
+        <div
+            class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]">
+        </div>
+
+        <!-- Glowing Light Effects -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div
+            class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                <!-- Hero Text Content -->
+                <div class="space-y-6 text-center md:text-left reveal">
+                    <span
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-800/80 text-emerald-200 border border-emerald-600/40 rounded-full text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-brand-accent"></i> KOPERASI PEMBERDAYA EKONOMI
+                        ANGGOTA
+
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                        Membangun Kesejahteraan Bersama melalui Kolaborasi
+                    </h1>
+                    <p
+                        class="text-base sm:text-lg text-emerald-100 max-w-xl mx-auto md:mx-0 leading-relaxed font-light">
+                        Koperasi Lentara hadir sebagai wadah kolaborasi dan kewirausahaan untuk memberdayakan anggota,
+                        mengembangkan usaha produktif, dan menciptakan peluang ekonomi yang berkelanjutan.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
+                        <a href="#katalog"
+                            class="animate-pulse-glow bg-brand-accent hover:bg-emerald-400 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all duration-300 text-center flex items-center justify-center gap-2 group">
+                            <span>Lihat Produk & Layanan</span>
+                            <i data-lucide="arrow-right"
+                                class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#about"
+                            class="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 text-center backdrop-blur-sm">
+                            Pelajari Layanan
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Dynamic Cards (With Floating Animation) -->
+                <div class="relative flex justify-center reveal delay-200">
+                    <div
+                        class="relative w-full max-w-md bg-white/10 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-2xl space-y-4">
+
+                        <!-- Floating Card 1 -->
+                        <div
+                            class="animate-float flex items-center gap-4 bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-lg hover:bg-white/20 transition">
+                            <div class="p-3 bg-brand-accent text-white rounded-xl shadow-inner">
+                                <i data-lucide="package" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Usaha Produktif</h4>
+                                <p class="text-xs text-emerald-200">Percetakan, konveksi, dan produk UMKM untuk
+                                    memenuhi kebutuhan individu, organisasi, dan institusi.</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 2 -->
+                        <div
+                            class="animate-float-delayed flex items-center gap-4 bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-lg hover:bg-white/20 transition">
+                            <div class="p-3 bg-brand-accent text-white rounded-xl shadow-inner">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Pemberdayaan Anggota</h4>
+                                <p class="text-xs text-emerald-200">Membangun ekosistem koperasi yang mendorong partisipasi, kemandirian, dan pertumbuhan anggota.</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Card 3 -->
+                        <div
+                            class="animate-float flex items-center gap-4 bg-white/15 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-lg hover:bg-white/20 transition">
+                            <div class="p-3 bg-brand-accent text-white rounded-xl shadow-inner">
+                                <i data-lucide="truck" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Pertumbuhan Bersama</h4>
+                                <p class="text-xs text-emerald-200">Mengembangkan usaha koperasi untuk menciptakan manfaat ekonomi yang dapat dirasakan bersama.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+                <!-- Left Visual Banner -->
+                <div class="relative reveal">
+                    <div
+                        class="w-full h-80 sm:h-96 bg-gradient-to-br from-brand-light to-emerald-100/50 border border-emerald-200 rounded-3xl flex items-center justify-center p-8 relative shadow-lg overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-brand-dark/5 group-hover:bg-transparent transition-all duration-500">
+                        </div>
+                        <div class="text-center space-y-4 z-10">
+                            <div
+                                class="w-20 h-20 bg-brand-dark text-white rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="building-2" class="w-10 h-10 text-brand-accent"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-dark">Lentara Kalimantan Selatan</h3>
+                            <p class="text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
+                                Wadah kolaborasi pusat logistik modern dan pemberdayaan ekonomi lokal Kalsel.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Description & Animated Counter -->
+                <div class="space-y-6 reveal delay-200">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-brand-light text-brand-dark rounded-lg text-xs font-bold uppercase tracking-wider border border-emerald-200">
+                        <i data-lucide="info" class="w-4 h-4"></i> Tentang Kami
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">
+                        Tentang koperasi Lentara
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        Koperasi Lentara adalah wadah kolaborasi dan kewirausahaan yang dibangun untuk memberdayakan anggota sekaligus menciptakan peluang ekonomi yang berkelanjutan.
+
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        Melalui pengelolaan usaha dan semangat kebersamaan, Lentara mengembangkan kegiatan ekonomi yang memberikan manfaat bagi anggota serta membuka ruang bagi pertumbuhan usaha secara berkelanjutan.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        Koperasi juga terus membangun sistem organisasi yang mendukung transparansi, akuntabilitas, dan partisipasi anggota dalam pengembangan koperasi.
+                    </p>
+
+                    <!-- Animated Counter Box -->
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-gray-100" id="counter-section">
+                        <div class="border-l-4 border-brand-dark pl-4">
+                            <div class="text-3xl sm:text-4xl font-extrabold text-brand-dark flex items-center">
+                                <span class="counter" data-target="37">0</span>+
+                            </div>
+                            <span class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Anggota
+                                Koperasi</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- KATALOG PRODUK SECTION -->
+    <section id="katalog" class="py-24 bg-brand-light/40 border-y border-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-10 reveal">
+                <span
+                    class="px-3.5 py-1.5 bg-brand-dark text-emerald-200 text-xs font-semibold rounded-full uppercase tracking-wider inline-block">
+                    Katalog Produk
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Produk Unggulan Anggota Koperasi</h2>
+                <p class="text-gray-600 text-sm sm:text-base">Dukung produk lokal berkualitas hasil karya UMKM
+                    Kalimantan Selatan.</p>
+            </div>
+
+            <!-- Filter Categories Button (Visual Static) -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10 reveal delay-100" id="filter-container">
+                <button type="button"
+                    class="filter-btn active bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition shadow-md">
+                    Semua Produk
+                </button>
+                <button type="button"
+                    class="filter-btn bg-white text-gray-700 hover:bg-brand-dark hover:text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition shadow-sm border border-gray-200">
+                    Makanan & Minuman
+                </button>
+                <button type="button"
+                    class="filter-btn bg-white text-gray-700 hover:bg-brand-dark hover:text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition shadow-sm border border-gray-200">
+                    Pakaian & Konveksi
+                </button>
+                <button type="button"
+                    class="filter-btn bg-white text-gray-700 hover:bg-brand-dark hover:text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition shadow-sm border border-gray-200">
+                    Jasa Percetakan
+                </button>
+            </div>
+
+            <!-- Product Cards Grid (Statis HTML) -->
+            <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500">
+
+                <!-- Product Card 1 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group">
+                    <div class="relative h-52 bg-gray-100 overflow-hidden">
+                        <img src="asset/img/firayur_keripik_nangka.jpg"
+                            alt="Firayur Keripik Nangka"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span
+                            class="absolute top-3 left-3 bg-brand-dark/90 text-emerald-200 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm border border-emerald-500/20">
+                            Makanan & Minuman
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-base group-hover:text-brand-dark transition-colors duration-200">
+                                Firayur Keripik Nangka</h3>
+                            <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">Cemilan olahan buah nangka asli yang diolah menjadi keripik dengan tekstur yang renyah (kriuuuk). Menawarkan cara unik menikmati buah nangka segar dengan sensasi gurih dan renyah, sangat cocok dijadikan teman santai atau oleh-oleh.</p>
+                        </div>
+                        <div class="space-y-1.5 pt-1">
+                            <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <!-- Tombol Shopee -->
+                                <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                    </svg>
+                                    Shopee
+                                </a>
+
+                                <!-- Tombol TikTok Shop -->
+                                <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                    </svg>
+                                    TikTok Shop
+                                </a>
+                            </div>
+
+                            <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                            <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:%20*Amplang%20Ikan%20Haruan%20Super*%20(By:%20Dua%20Putri%20Banjarbaru).%20Mohon%20info%20stok%20&%20proses%20pemesanan."
+                                target="_blank"
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                Pesan via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group">
+                    <div class="relative h-52 bg-gray-100 overflow-hidden">
+                        <img src="asset/img/saltung.jpeg"
+                            alt="Saltung (Saluang-Tepung)"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span
+                            class="absolute top-3 left-3 bg-brand-dark/90 text-emerald-200 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm border border-emerald-500/20">Makanan & Minuman
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-base group-hover:text-brand-dark transition-colors duration-200">
+                                Saltung (Saluang Tepung)</h3>
+                            <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">Cemilan gurih khas yang terbuat dari ikan saluang pilihan berbalut tepung renyah. Dengan slogan "Sakali Coba Jadi Ketagihan", produk ini menawarkan rasa yang renyah, gurih, dan lezat, sangat cocok dinikmati sebagai camilan santai maupun teman makan nasi.</p>
+                        </div>
+                        <div class="space-y-1.5 pt-1">
+                            <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <!-- Tombol Shopee -->
+                                <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                    </svg>
+                                    Shopee
+                                </a>
+
+                                <!-- Tombol TikTok Shop -->
+                                <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                    </svg>
+                                    TikTok Shop
+                                </a>
+                            </div>
+
+                            <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                            <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:%20*Amplang%20Ikan%20Haruan%20Super*%20(By:%20Dua%20Putri%20Banjarbaru).%20Mohon%20info%20stok%20&%20proses%20pemesanan."
+                                target="_blank"
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                Pesan via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group">
+                    <div class="relative h-52 bg-gray-100 overflow-hidden">
+                        <img src="asset/img/pdh.jpeg"
+                            alt="Kain Sasirangan Motif Klasik"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span
+                            class="absolute top-3 left-3 bg-brand-dark/90 text-emerald-200 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm border border-emerald-500/20">
+                            Pakaian & Konveksi
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-base group-hover:text-brand-dark transition-colors duration-200">
+                                Kemeja / PDH / Korsa Custom</h3>
+                            <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">Kemeja lengan panjang berkualitas tinggi dengan kombinasi warna krem dan biru tua, dilengkapi dua saku dada, aksen kancing, serta bordir/sablon custom di bagian depan, lengan, dan punggung (seperti desain "Math Education"). Cocok digunakan sebagai seragam organisasi, himpunan mahasiswa, instansi, maupun komunitas dengan tampilan profesional dan kasual.</p>
+                        </div>
+                        <div class="space-y-1.5 pt-1">
+                            <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <!-- Tombol Shopee -->
+                                <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                    </svg>
+                                    Shopee
+                                </a>
+
+                                <!-- Tombol TikTok Shop -->
+                                <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                    </svg>
+                                    TikTok Shop
+                                </a>
+                            </div>
+
+                            <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                            <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:%20*Amplang%20Ikan%20Haruan%20Super*%20(By:%20Dua%20Putri%20Banjarbaru).%20Mohon%20info%20stok%20&%20proses%20pemesanan."
+                                target="_blank"
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                Pesan via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group">
+                    <div class="relative h-52 bg-gray-100 overflow-hidden">
+                        <img src="asset/img/brosur.jpeg"
+                            alt="Sambal Ramania Khas Kalsel"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span
+                            class="absolute top-3 left-3 bg-brand-dark/90 text-emerald-200 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm border border-emerald-500/20">
+                            Jasa Percetakan
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-base group-hover:text-brand-dark transition-colors duration-200">
+                                Jasa Percetakan Brosur Promosi Usaha</h3>
+                            <p class="text-xs text-gray-500 mt-2 line-clamp-2 leading-relaxed">Layanan cetak brosur berkualitas tinggi yang dirancang informatif dan menarik untuk berbagai kebutuhan bisnis (seperti brosur daftar harga, menu, atau promosi layanan). Dilengkapi dengan tata letak profesional, informasi kontak, daftar layanan, serta visual yang jelas untuk menarik minat pelanggan secara efektif.</p>
+                        </div>
+                        <div class="space-y-1.5 pt-1">
+                            <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <!-- Tombol Shopee -->
+                                <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                    </svg>
+                                    Shopee
+                                </a>
+
+                                <!-- Tombol TikTok Shop -->
+                                <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                    class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                    <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                    </svg>
+                                    TikTok Shop
+                                </a>
+                            </div>
+
+                            <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                            <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:%20*Amplang%20Ikan%20Haruan%20Super*%20(By:%20Dua%20Putri%20Banjarbaru).%20Mohon%20info%20stok%20&%20proses%20pemesanan."
+                                target="_blank"
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                Pesan via WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Link Ke Halaman Katalog Produk Lengkap -->
+            <div class="text-center mt-12 reveal">
+                <a href="katalog.html"
+                    class="inline-flex items-center gap-2 bg-brand-dark hover:bg-brand-primary text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 group">
+                    <span>Lihat Seluruh Katalog Produk</span>
+                    <i data-lucide="arrow-right"
+                        class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALASAN MEMILIH KAMI (KEUNGGULAN) -->
+    <section id="keunggulan" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16 reveal">
+                <span class="text-brand-primary font-bold text-xs uppercase tracking-wider">Keunggulan Layanan</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Alasan Utama Memilih Lentara</h2>
+                <p class="text-gray-600 text-sm sm:text-base">Nilai tambah yang kami berikan untuk pertumbuhan bisnis
+                    dan kepuasan pelanggan.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Card 1: Berbasis Koperasi -->
+                <div
+                    class="reveal p-8 rounded-3xl bg-brand-light/40 border border-emerald-100 hover:border-brand-accent/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                    <div
+                        class="w-14 h-14 bg-brand-dark text-white rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
+                        <i data-lucide="building-2" class="w-7 h-7 text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Berbasis Koperasi</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Lentara tidak hanya menjalankan kegiatan usaha, tetapi juga membangun manfaat ekonomi melalui kepemilikan dan partisipasi anggota.
+                    </p>
+                </div>
+
+                <!-- Card 2: Memberdayakan Anggota -->
+                <div
+                    class="reveal delay-100 p-8 rounded-3xl bg-brand-light/40 border border-emerald-100 hover:border-brand-accent/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                    <div
+                        class="w-14 h-14 bg-brand-dark text-white rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-7 h-7 text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Memberdayakan Anggota</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Koperasi dibangun sebagai wadah untuk memberdayakan anggota dan menciptakan peluang ekonomi yang berkelanjutan.
+                    </p>
+                </div>
+
+                <!-- Card 3: Produk Beragam -->
+                <div
+                    class="reveal delay-200 p-8 rounded-3xl bg-brand-light/40 border border-emerald-100 hover:border-brand-accent/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                    <div
+                        class="w-14 h-14 bg-brand-dark text-white rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
+                        <i data-lucide="printer" class="w-7 h-7 text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Produk Beragam</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Layanan usaha mencakup percetakan dan konveksi dengan berbagai pilihan produk sesuai kebutuhan pelanggan.
+                    </p>
+                </div>
+
+                <!-- Card 4: Kualitas Terpercaya -->
+                <div
+                    class="reveal delay-300 p-8 rounded-3xl bg-brand-light/40 border border-emerald-100 hover:border-brand-accent/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                    <div
+                        class="w-14 h-14 bg-brand-dark text-white rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield-check" class="w-7 h-7 text-brand-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Kualitas Terpercaya</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Komitmen penuh dalam memberikan hasil produksi terbaik yang terjaga kualitasnya untuk setiap kepuasan pelanggan.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONI KONSUMEN & UMKM -->
+    <section id="testimoni" class="py-24 bg-brand-dark text-white relative overflow-hidden">
+        <div class="absolute -top-32 -left-32 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16 reveal">
+                <span class="text-emerald-300 text-xs font-semibold uppercase tracking-wider">Testimoni Member &
+                    Konsumen</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Apa Kata Mereka?</h2>
+                <p class="text-emerald-100 text-sm sm:text-base">Pengalaman nyata dari pembeli dan anggota pelaku UMKM
+                    Kalsel.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Testimoni 1 -->
+                <div
+                    class="reveal p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/10 flex flex-col justify-between hover:bg-white/15 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-400 gap-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-emerald-100 text-sm italic leading-relaxed">
+                            "Sejak menitipkan stok di Fulfillment Lentara, pengiriman pesanan toko online saya jadi jauh
+                            lebih cepat. Kualitas pakingnya juga sangat rapi!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-6 border-t border-white/10 mt-6">
+                        <div
+                            class="w-11 h-11 bg-brand-accent rounded-full flex items-center justify-center font-bold text-white shadow-inner">
+                            H
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Hj. Noor - Banjarbaru</h4>
+                            <span class="text-xs text-emerald-300">Produsen Amplang</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimoni 2 -->
+                <div
+                    class="reveal delay-100 p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/10 flex flex-col justify-between hover:bg-white/15 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-400 gap-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-emerald-100 text-sm italic leading-relaxed">
+                            "Beli oleh-oleh Kalsel lewat katalog Lentara sangat praktis. Langsung terhubung ke WA,
+                            respon cepat dan barangnya dijamin asli dari pengrajin."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-6 border-t border-white/10 mt-6">
+                        <div
+                            class="w-11 h-11 bg-brand-accent rounded-full flex items-center justify-center font-bold text-white shadow-inner">
+                            R
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Rian Rahmadi</h4>
+                            <span class="text-xs text-emerald-300">Konsumen - Banjarmasin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimoni 3 -->
+                <div
+                    class="reveal delay-200 p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/10 flex flex-col justify-between hover:bg-white/15 transition-all duration-300">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-400 gap-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-emerald-100 text-sm italic leading-relaxed">
+                            "Bergabung dengan Koperasi Lentara membuka akses pasar baru buat produk saya. Beban ngurusin
+                            pengiriman barang juga berkurang banyak."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-6 border-t border-white/10 mt-6">
+                        <div
+                            class="w-11 h-11 bg-brand-accent rounded-full flex items-center justify-center font-bold text-white shadow-inner">
+                            S
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Siti Rahmah</h4>
+                            <span class="text-xs text-emerald-300">Pemilik Usaha Herbal</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-4 md:col-span-2">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-9 h-9 bg-brand-accent text-white font-bold rounded-xl flex items-center justify-center">
+                            L</div>
+                        <span class="text-xl font-extrabold text-white tracking-wide">LENTARA</span>
+                    </div>
+                    <p class="text-sm text-gray-400 max-w-sm leading-relaxed">
+                        Fulfillment Center & Koperasi UMKM Kalimantan Selatan. Menghubungkan produk lokal unggulan
+                        dengan standar operasional pergudangan profesional.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Navigasi</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-brand-accent transition">Tentang Kami</a></li>
+                        <li><a href="#katalog" class="hover:text-brand-accent transition">Katalog Produk</a></li>
+                        <li><a href="#keunggulan" class="hover:text-brand-accent transition">Keunggulan</a></li>
+                        <li><a href="#testimoni" class="hover:text-brand-accent transition">Testimoni</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Kontak Koperasi</h4>
+                    <p class="text-sm text-gray-400">Kalimantan Selatan, Indonesia</p>
+                    <p class="text-sm text-gray-400 mt-2">WhatsApp: +62 851-2617-1240</p>
+                    <p class="text-sm text-gray-400">Instagram: @lentaracoop</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+                &copy; 2026 Koperasi Lentara Kalimantan Selatan. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC (Sisa Interaksi UI Saja) -->
+    <script>
+        // 1. Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 2. Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 3. Scroll Reveal Animation using Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // 4. Animated Number Counters
+        let counterAnimated = false;
+        const counterSection = document.getElementById('counter-section');
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterAnimated) {
+                    counterAnimated = true;
+                    animateCounters();
+                }
+            });
+        }, {threshold: 0.5});
+
+        if (counterSection) {
+            counterObserver.observe(counterSection);
+        }
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // milliseconds
+                const stepTime = 20;
+                const steps = duration / stepTime;
+                const increment = target / steps;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.innerText = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.innerText = Math.ceil(current);
+                    }
+                }, stepTime);
+            });
+        }
+    </script>
+</body>
+
+</html>

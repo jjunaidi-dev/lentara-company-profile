@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk UMKM - Koperasi & Fulfillment</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#064e3b',   /* Emerald 900 / Hijau Tua */
+                            primary: '#047857',/* Emerald 700 */
+                            light: '#f0fdf4',  /* Emerald 50 */
+                            accent: '#10b981'  /* Emerald 500 */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md text-gray-800 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="inline-block group">
+                    <img src="asset/img/logo_lentara.png" alt="Lentara Fulfillment & Koperasi"
+                        class="h-10 w-auto object-contain transition duration-300 group-hover:opacity-80"
+                        onerror="this.src='https://placehold.co/120x40/064e3b/ffffff?text=LENTARA'" />
+                </a>
+
+                <!-- Search Bar Desktop Header -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8">
+                    <div class="relative w-full">
+                        <input type="text" id="header-search-input"
+                            placeholder="Cari nama produk, kategori, atau UMKM..."
+                            class="w-full bg-gray-100/80 border border-gray-200 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-brand-primary focus:bg-white transition">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-2.5"></i>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="index.html" class="text-gray-600 hover:text-brand-dark transition">Beranda</a>
+                    <a href="index.html#about" class="text-gray-600 hover:text-brand-dark transition">Tentang Kami</a>
+                    <a href="katalog.html" class="text-brand-dark font-bold border-b-2 border-brand-dark pb-1">Katalog
+                        Produk</a>
+                    <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20ingin%20bertanya%20mengenai%20produk%20koperasi"
+                        target="_blank"
+                        class="bg-brand-dark hover:bg-brand-primary text-white px-5 py-2.5 rounded-full font-semibold transition shadow-md hover:shadow-lg">
+                        Bantuan WA
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="p-2 text-gray-600 hover:text-brand-dark focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-6 space-y-3">
+            <div class="relative w-full mb-3">
+                <input type="text" id="mobile-search-input" placeholder="Cari produk..."
+                    class="w-full bg-gray-100 border border-gray-200 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-brand-primary">
+                <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-2.5"></i>
+            </div>
+            <a href="index.html" class="block py-2 text-gray-700 font-medium">Beranda</a>
+            <a href="index.html#about" class="block py-2 text-gray-700 font-medium">Tentang Kami</a>
+            <a href="katalog.html" class="block py-2 text-brand-dark font-bold">Katalog Produk</a>
+            <a href="https://wa.me/6285126171240" target="_blank"
+                class="block text-center bg-brand-dark text-white font-semibold py-2.5 rounded-xl shadow">
+                Hubungi via WhatsApp
+            </a>
+        </div>
+    </nav>
+
+    <!-- BANNER PAGE -->
+    <section class="bg-gradient-to-r from-brand-dark to-brand-primary text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-xs text-emerald-200 font-medium mb-1">
+                        <a href="index.html" class="hover:underline">Beranda</a>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        <span>Katalog Produk</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Katalog Produk UMKM Kalsel</h1>
+                    <p class="text-xs sm:text-sm text-emerald-100 mt-1">Dukung perekonomian lokal dengan membeli produk
+                        langsung dari anggota Koperasi Lentara.</p>
+                </div>
+                <div
+                    class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10 text-xs font-semibold">
+                    <i data-lucide="store" class="w-5 h-5 text-emerald-300"></i>
+                    <div>
+                        <span class="block text-white">100% Produk Terverifikasi</span>
+                        <span class="text-emerald-200 font-normal">Sistem Fulfillment Standar Terjaga</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CATALOG CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+
+        <!-- HORIZONTAL CATEGORY FILTER SECTION -->
+        <section class="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="filter" class="w-3.5 h-3.5 text-brand-dark"></i> Filter Kategori:
+                </span>
+                <button onclick="resetFilters()"
+                    class="text-xs text-brand-primary hover:underline font-semibold flex items-center gap-1">
+                    <i data-lucide="rotate-ccw" class="w-3 h-3"></i> Reset Filter
+                </button>
+            </div>
+
+            <!-- Horizontal Scroll Wrapper with Controls -->
+            <div class="relative flex items-center">
+                <button onclick="scrollCategory(-200)"
+                    class="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 mr-2 shrink-0 transition">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+
+                <div id="category-scroll-container"
+                    class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-1 w-full">
+                    <button onclick="setCategory('all')" data-category="all"
+                        class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-brand-dark text-white shadow-sm">Semua</button>
+                    <button onclick="setCategory('Makanan & Minuman')" data-category="Makanan & Minuman"
+                        class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-gray-100/80 text-gray-600 hover:bg-gray-200 hover:text-gray-900">Makanan & Minuman</button>
+                    <button onclick="setCategory('Pakaian & Konveksi')"
+                        data-category="Pakaian & Konveksi"
+                        class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-gray-100/80 text-gray-600 hover:bg-gray-200 hover:text-gray-900">Pakaian & Konveksi</button>
+                    <button onclick="setCategory('Jasa Percetakan')" data-category="Jasa percetakan"
+                        class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-gray-100/80 text-gray-600 hover:bg-gray-200 hover:text-gray-900">Jasa Percetakan</button>
+                    <button onclick="setCategory('Merchandise')"
+                        data-category="Merchandise"
+                        class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-gray-100/80 text-gray-600 hover:bg-gray-200 hover:text-gray-900">Merchandise</button>
+                </div>
+
+                <button onclick="scrollCategory(200)"
+                    class="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 ml-2 shrink-0 transition">
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- TOP BAR: INFO & SORTING -->
+        <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <div class="text-xs sm:text-sm text-gray-600 font-medium">
+                <span id="pagination-info">Menampilkan 1 - 12 dari 14 produk</span>
+                <span id="active-filter-badge"
+                    class="ml-2 hidden inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-brand-light text-brand-dark"></span>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs font-medium text-gray-600 w-full sm:w-auto justify-end">
+                <span>Urutkan:</span>
+                <select id="sort-select" onchange="handleSortChange()"
+                    class="bg-gray-50 border border-gray-200 rounded-xl py-1.5 px-3 text-xs focus:outline-none focus:border-brand-primary">
+                    <option value="default">Terbaru</option>
+                    <option value="name-asc">Nama (A-Z)</option>
+                    <option value="name-desc">Nama (Z-A)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- PRODUCT CARDS GRID (STATIC HTML CARDS) -->
+        <div id="product-grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+            <!-- Card 1 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Makanan & Minuman" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/firayur_keripik_nangka.jpg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Makanan & Minuman
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> Firayuri
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Firayur Keripik Nangka</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Cemilan olahan buah nangka asli yang diolah menjadi keripik dengan tekstur yang renyah (kriuuuk). Menawarkan cara unik menikmati buah nangka segar dengan sensasi gurih dan renyah, sangat cocok dijadikan teman santai atau oleh-oleh.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 2 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Makanan & Minuman" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/saltung.jpeg"
+                        alt="Saltung (Saluang Tepung)"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Makanan & Minuman
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> Mama Dildan
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Saltung (Saluang Tepung)</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Cemilan gurih khas yang terbuat dari ikan saluang pilihan berbalut tepung renyah. Dengan slogan "Sakali Coba Jadi Ketagihan", produk ini menawarkan rasa yang renyah, gurih, dan lezat, sangat cocok dinikmati sebagai camilan santai maupun teman makan nasi.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 2 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Pakaian & Konveksi" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/pdh.jpeg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Pakaian & Konveksi
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> Lentara
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Kemeja / PDH / Korsa Custom</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Kemeja lengan panjang berkualitas tinggi dengan kombinasi warna krem dan biru tua, dilengkapi dua saku dada, aksen kancing, serta bordir/sablon custom di bagian depan, lengan, dan punggung (seperti desain "Math Education"). Cocok digunakan sebagai seragam organisasi, himpunan mahasiswa, instansi, maupun komunitas dengan tampilan profesional dan kasual.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 4 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Jasa Percetakan" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/brosur.jpeg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Jasa Percetakan
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> Lentara
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Jasa Percetakan Brosur Promosi Usaha</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Layanan cetak brosur berkualitas tinggi yang dirancang informatif dan menarik untuk berbagai kebutuhan bisnis (seperti brosur daftar harga, menu, atau promosi layanan). Dilengkapi dengan tata letak profesional, informasi kontak, daftar layanan, serta visual yang jelas untuk menarik minat pelanggan secara efektif.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 5 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Makanan & Minuman" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/sambal.jpeg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Makanan & Minuman
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> Mama Dildan
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Aneka Sambal Nusantara Mama Dildan</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Koleksi sambal kemasan botol siap saji dengan berbagai pilihan varian lauk khas yang kaya rasa dan menggugah selera. Praktis dinikmati sebagai pendamping makan nasi sehari-hari bagi para pecinta makanan pedas.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 6 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Merchandise" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/gelas.jpeg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Merchandise
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> AA Printing
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Mug / Cangkir Custom "Food & Passion"</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Mug bergaya enamel klasik berwarna putih dengan aksen garis hitam dan gagang merah cerah. Dihiasi dengan desain grafis bertema kuliner (Food & Passion) yang penuh warna di bagian badan serta cetakan gambar hati di bagian bawah mug, sangat cocok digunakan sebagai souvenir, merchandise kafe, atau koleksi pribadi.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 7 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Merchandise" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/tumbler.jpeg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Makanan & Minuman
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i> AA Printing
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Tumbler Custom Stainless / Termos LED</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Tumbler berbahan stainless steel berwarna biru elegan dengan cetakan desain grafis pemandangan kota dan logo korporat (seperti Waringin Hospitality) di sekeliling bodinya. Dilengkapi tutup kedap udara berfitur modern, sangat cocok digunakan sebagai merchandise perusahaan, suvenir promosi, atau hadiah eksklusif yang fungsional.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 8 -->
+            <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition duration-300 flex flex-col group"
+                data-category="Merchandise" data-umkm="Dua Putri Banjarbaru" data-name="Amplang Ikan Haruan Super">
+                <!-- Gambar Produk -->
+                <div class="relative h-48 bg-gray-100 overflow-hidden">
+                    <img src="asset/img/tas.jpeg"
+                        alt="Amplang Ikan Haruan Super"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span
+                        class="absolute top-3 left-3 bg-brand-dark/90 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
+                        Merchandise
+                    </span>
+                </div>
+
+                <!-- Konten Produk -->
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div class="space-y-1">
+                        <div
+                            class="text-[10px] font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="store" class="w-3 h-3"></i>AA Printing
+                        </div>
+                        <h3 class="font-bold text-gray-900 text-sm group-hover:text-brand-dark transition line-clamp-1">
+                            Tote Bag Kanvas Custom</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">Tas jinjing (tote bag) berbahan kanvas warna krem alami yang kuat dan ramah lingkungan. Dilengkapi dengan cetakan desain grafis tipografi kamus dan ilustrasi artistik bertema edukasi (seperti desain "Teacher" dan "mentor"), sangat cocok digunakan untuk kuliah, bekerja, membawa buku, maupun sebagai hadiah atau merchandise unik.</p>
+                    </div>
+
+                    <!-- Tombol Aksi: Shopee, TikTok Shop & WhatsApp -->
+                    <div class="space-y-1.5 pt-1">
+                        <!-- Grid untuk Shopee & TikTok Shop (Hijau Transparan) -->
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <!-- Tombol Shopee -->
+                            <a href="https://id.shp.ee/aNVCAfPy" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.12 7.64l-1.42-3.41c-.2-.47-.7-.79-1.22-.79H7.52c-.52 0-1.02.32-1.22.79L4.88 7.64C4.34 8.92 4 10.38 4 12v7c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7c0-1.62-.34-3.08-.88-4.36zM7.8 5h8.4l1 2.4H6.8l1-2.4zM18 19H6v-5.22c.32.14.67.22 1.04.22 1.65 0 3-1.35 3-3s-1.35-3-3-3c-.37 0-.72.08-1.04.22V9h12v10z" />
+                                </svg>
+                                Shopee
+                            </a>
+
+                            <!-- Tombol TikTok Shop -->
+                            <a href="https://www.tiktok.com/@lentaracoop?_r=1" target="_blank"
+                                class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/60 font-semibold py-1.5 px-2 rounded-lg text-[11px] flex items-center justify-center gap-1.5 transition">
+                                <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z" />
+                                </svg>
+                                TikTok Shop
+                            </a>
+                        </div>
+
+                        <!-- Tombol WhatsApp (Full Width di Bawahnya - Hijau Padat) -->
+                        <a href="https://wa.me/6285126171240?text=Halo%20Lentara,%20saya%20berminat%20pesan%20produk%20UMKM:"
+                            target="_blank"
+                            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                            Pesan via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="empty-state"
+            class="hidden bg-white p-12 rounded-2xl border border-gray-100 text-center space-y-4 shadow-sm">
+            <div class="w-16 h-16 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto">
+                <i data-lucide="package-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800">Produk Tidak Ditemukan</h3>
+            <p class="text-xs text-gray-500 max-w-sm mx-auto">Coba gunakan kata kunci lain atau pilih kategori produk
+                yang berbeda.</p>
+            <button onclick="resetFilters()"
+                class="bg-brand-dark text-white px-5 py-2 rounded-xl text-xs font-semibold hover:bg-brand-primary transition">Tampilkan
+                Semua Produk</button>
+        </div>
+
+        <!-- PAGINATION CONTROLS -->
+        <div id="pagination-container"
+            class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
+            <button id="prev-page" onclick="changePage(-1)"
+                class="px-4 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i> SEBELUMNYA
+            </button>
+
+            <div id="page-numbers" class="flex items-center gap-1">
+                <button onclick="goToPage(1)"
+                    class="page-num-btn w-8 h-8 rounded-xl text-xs font-bold transition bg-brand-dark text-white">1</button>
+                <button onclick="goToPage(2)"
+                    class="page-num-btn w-8 h-8 rounded-xl text-xs font-bold transition text-gray-600 hover:bg-gray-100">2</button>
+            </div>
+
+            <button id="next-page" onclick="changePage(1)"
+                class="px-4 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1">
+                SELANJUTNYA <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <!-- DAFTAR BRAND / UMKM ANGGOTA (STATIC HTML CARDS) -->
+        <section class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm space-y-6 mt-12">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <i data-lucide="store" class="w-5 h-5 text-brand-dark"></i> Brand & UMKM Anggota Koperasi
+                    </h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Klik pada salah satu brand untuk menyaring produk khusus
+                        dari UMKM tersebut.</p>
+                </div>
+                <span class="text-xs font-semibold bg-brand-light text-brand-dark px-3 py-1 rounded-full w-fit">
+                    Terverifikasi Lentara
+                </span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4" id="umkm-brand-grid">
+
+                <div onclick="setUmkm('Dua Putri Banjarbaru')" data-umkm="Dua Putri Banjarbaru"
+                    class="umkm-card cursor-pointer p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 hover:shadow-md transition text-center space-y-2 group">
+                    <div
+                        class="w-10 h-10 bg-brand-dark/10 group-hover:bg-brand-dark text-brand-dark group-hover:text-white rounded-full flex items-center justify-center mx-auto transition">
+                        <i data-lucide="store" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-xs text-gray-800 line-clamp-1">Fitrayuri</h4>
+                    <span class="text-[10px] text-gray-500 block">3 Produk Terdaftar</span>
+                </div>
+
+                <div onclick="setUmkm('Herbal Borneo Mandiri')" data-umkm="Herbal Borneo Mandiri"
+                    class="umkm-card cursor-pointer p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 hover:shadow-md transition text-center space-y-2 group">
+                    <div
+                        class="w-10 h-10 bg-brand-dark/10 group-hover:bg-brand-dark text-brand-dark group-hover:text-white rounded-full flex items-center justify-center mx-auto transition">
+                        <i data-lucide="store" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-xs text-gray-800 line-clamp-1">Mama Dildan</h4>
+                    <span class="text-[10px] text-gray-500 block">4 Produk Terdaftar</span>
+                </div>
+
+                <div onclick="setUmkm('Galeri Sasirangan Hasnur')" data-umkm="Galeri Sasirangan Hasnur"
+                    class="umkm-card cursor-pointer p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 hover:shadow-md transition text-center space-y-2 group">
+                    <div
+                        class="w-10 h-10 bg-brand-dark/10 group-hover:bg-brand-dark text-brand-dark group-hover:text-white rounded-full flex items-center justify-center mx-auto transition">
+                        <i data-lucide="store" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-xs text-gray-800 line-clamp-1">AA Printing</h4>
+                    <span class="text-[10px] text-gray-500 block">3 Produk Terdaftar</span>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 py-10 border-t border-gray-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-8 h-8 bg-brand-accent text-white font-bold rounded-lg flex items-center justify-center">
+                        L</div>
+                    <span class="text-lg font-bold text-white">LENTARA</span>
+                </div>
+                <p class="text-xs text-gray-400 text-center md:text-left">
+                    Pusat Fulfillment & Koperasi Digital UMKM Kalimantan Selatan.
+                </p>
+                <div class="text-xs text-gray-500">
+                    &copy; 2026 Koperasi Lentara. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTWEIGHT FILTER CONTROLLER SCRIPT -->
+    <script>
+        lucide.createIcons();
+
+        let selectedCategory = 'all';
+        let selectedUmkm = 'all';
+        let searchQuery = '';
+        let currentSort = 'default';
+        let currentPage = 1;
+        const ITEMS_PER_PAGE = 12;
+
+        function applyFilters() {
+            const cards = Array.from(document.querySelectorAll('.product-card'));
+
+            // Filter elements based on current category, umkm, and search query
+            let filtered = cards.filter(card => {
+                const cat = card.getAttribute('data-category');
+                const umkm = card.getAttribute('data-umkm');
+                const name = card.getAttribute('data-name').toLowerCase();
+                const textContent = card.innerText.toLowerCase();
+
+                const matchCat = (selectedCategory === 'all' || cat === selectedCategory);
+                const matchUmkm = (selectedUmkm === 'all' || umkm === selectedUmkm);
+                const matchSearch = (searchQuery === '' || name.includes(searchQuery.toLowerCase()) || textContent.includes(searchQuery.toLowerCase()));
+
+                return matchCat && matchUmkm && matchSearch;
+            });
+
+            // Sorting logic
+            if (currentSort === 'name-asc') {
+                filtered.sort((a, b) => a.getAttribute('data-name').localeCompare(b.getAttribute('data-name')));
+            } else if (currentSort === 'name-desc') {
+                filtered.sort((a, b) => b.getAttribute('data-name').localeCompare(a.getAttribute('data-name')));
+            }
+
+            // Pagination calculation
+            const totalItems = filtered.length;
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+
+            // Toggle visibility for all cards
+            cards.forEach(card => card.classList.add('hidden'));
+
+            const paginatedItems = filtered.slice(startIndex, endIndex);
+            paginatedItems.forEach(card => card.classList.remove('hidden'));
+
+            // Empty state handling
+            const emptyState = document.getElementById('empty-state');
+            if (totalItems === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            // Info text update
+            document.getElementById('pagination-info').innerText = totalItems > 0
+                ? `Menampilkan ${startIndex + 1} - ${endIndex} dari ${totalItems} produk`
+                : `Menampilkan 0 produk`;
+
+            // Active badge update
+            const badge = document.getElementById('active-filter-badge');
+            if (selectedUmkm !== 'all') {
+                badge.innerText = `Brand: ${selectedUmkm}`;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            updatePaginationUI(totalPages);
+            lucide.createIcons();
+        }
+
+        function updatePaginationUI(totalPages) {
+            const pageNumbersContainer = document.getElementById('page-numbers');
+            const prevBtn = document.getElementById('prev-page');
+            const nextBtn = document.getElementById('next-page');
+
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const isActive = currentPage === i;
+                html += `<button onclick="goToPage(${i})" class="w-8 h-8 rounded-xl text-xs font-bold transition ${isActive ? 'bg-brand-dark text-white' : 'text-gray-600 hover:bg-gray-100'}">${i}</button>`;
+            }
+            pageNumbersContainer.innerHTML = html;
+        }
+
+        function setCategory(cat) {
+            selectedCategory = cat;
+            currentPage = 1;
+
+            // Update active category pill styles
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = "category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-brand-dark text-white shadow-sm";
+                } else {
+                    btn.className = "category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-gray-100/80 text-gray-600 hover:bg-gray-200 hover:text-gray-900";
+                }
+            });
+
+            applyFilters();
+        }
+
+        function setUmkm(umkm) {
+            if (selectedUmkm === umkm) {
+                selectedUmkm = 'all';
+            } else {
+                selectedUmkm = umkm;
+            }
+            currentPage = 1;
+
+            // Update active brand card styles
+            document.querySelectorAll('.umkm-card').forEach(card => {
+                if (card.getAttribute('data-umkm') === selectedUmkm) {
+                    card.className = "umkm-card cursor-pointer p-4 rounded-xl border border-brand-primary bg-brand-light/50 ring-2 ring-brand-primary/20 hover:shadow-md transition text-center space-y-2 group";
+                } else {
+                    card.className = "umkm-card cursor-pointer p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 hover:shadow-md transition text-center space-y-2 group";
+                }
+            });
+
+            applyFilters();
+            window.scrollTo({top: 250, behavior: 'smooth'});
+        }
+
+        function scrollCategory(offset) {
+            document.getElementById('category-scroll-container').scrollBy({left: offset, behavior: 'smooth'});
+        }
+
+        function changePage(delta) {
+            currentPage += delta;
+            applyFilters();
+            window.scrollTo({top: 300, behavior: 'smooth'});
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            applyFilters();
+            window.scrollTo({top: 300, behavior: 'smooth'});
+        }
+
+        function handleSortChange() {
+            currentSort = document.getElementById('sort-select').value;
+            applyFilters();
+        }
+
+        function resetFilters() {
+            selectedCategory = 'all';
+            selectedUmkm = 'all';
+            searchQuery = '';
+            currentSort = 'default';
+            currentPage = 1;
+
+            document.getElementById('header-search-input').value = '';
+            document.getElementById('mobile-search-input').value = '';
+            document.getElementById('sort-select').value = 'default';
+
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === 'all') {
+                    btn.className = "category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-brand-dark text-white shadow-sm";
+                } else {
+                    btn.className = "category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition shrink-0 bg-gray-100/80 text-gray-600 hover:bg-gray-200 hover:text-gray-900";
+                }
+            });
+
+            document.querySelectorAll('.umkm-card').forEach(card => {
+                card.className = "umkm-card cursor-pointer p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 hover:shadow-md transition text-center space-y-2 group";
+            });
+
+            applyFilters();
+        }
+
+        const handleSearch = (e) => {
+            searchQuery = e.target.value;
+            currentPage = 1;
+            applyFilters();
+        };
+
+        document.getElementById('header-search-input').addEventListener('input', handleSearch);
+        document.getElementById('mobile-search-input').addEventListener('input', handleSearch);
+
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Initial run
+        document.addEventListener('DOMContentLoaded', () => {
+            applyFilters();
+        });
+    </script>
+</body>
+
+</html>
